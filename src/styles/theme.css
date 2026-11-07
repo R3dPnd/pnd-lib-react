@@ -1,0 +1,145 @@
+/*
+ * PND arcade theme: Silkscreen + the dann-of-thursday neon palette.
+ *
+ * Tokens apps are expected to override:
+ *   --accent        live accent (primary button, active tab, focused input, labels)
+ *   --edge          frame color of the element it is set on
+ *   --panel-accent  heading color of a .panel
+ *   --who           a person/agent's color (avatar, typing indicator, link buttons)
+ *
+ * <html> data attributes (set by applyResolved / useDisplay):
+ *   data-density  compact | comfortable | spacious
+ *   data-effects  full | reduced | off
+ *   data-touch    on | off
+ *   data-font     pixel | readable
+ *   data-profile  handheld | compact | desktop | large
+ */
+
+@font-face {
+  font-family: "Silkscreen";
+  src: url("./fonts/Silkscreen-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Silkscreen";
+  src: url("./fonts/Silkscreen-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --pixel: "Silkscreen", ui-monospace, monospace;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --bg: #07070d;
+  --bg-glow: #12123a;
+  --panel: #0d0d1a;
+  --panel-2: #141428;
+  --well: #05050b; /* inputs, code wells */
+  --line: #2a2a55;
+  --line-hover: #4a4a8a;
+  --ink: #e8f1ff;
+  --muted: #8a93c0;
+  --placeholder: #565e8a;
+  --shadow: #000;
+
+  /* neon */
+  --cyan: #00ddff;
+  --teal: #00ffdd;
+  --green: #00ff88;
+  --orange: #ff9900;
+  --violet: #bb77ff;
+  --red: #ff3377;
+  --magenta: #ff55ff;
+  --yellow: #ffdd00;
+  --blue: #4488ff;
+
+  /* tinted backgrounds for alert surfaces */
+  --red-bg: #2a0a16;
+  --red-ink: #ffb3c8;
+  --orange-bg: #241304;
+  --cyan-bg: #062a33;
+
+  --accent: var(--teal);
+  --focus: var(--yellow); /* keyboard focus outline */
+
+  --px: 3px; /* pixel-frame thickness */
+  color-scheme: dark;
+
+  /* Body face: pixel by default; "readable" swaps in a system face (headings stay pixel). */
+  --body-font: var(--pixel);
+
+  /* Density tokens (comfortable). data-density on <html> swaps them. */
+  --app-py: 24px;
+  --app-px: 20px;
+  --gap: 22px;
+  --gap-sm: 12px;
+  --pad: 16px;
+  --fs: 12px;
+
+  /* UI scale, applied as CSS zoom on <body>; --vh is the viewport height in zoomed px. */
+  --zoom: 1;
+  --vh: calc(100dvh / var(--zoom));
+}
+:root[data-density="compact"] { --app-py: 10px; --app-px: 12px; --gap: 12px; --gap-sm: 8px; --pad: 10px; --fs: 11px; }
+:root[data-density="spacious"] { --app-py: 32px; --app-px: 32px; --gap: 28px; --gap-sm: 16px; --pad: 22px; --fs: 13px; }
+:root[data-font="readable"] { --body-font: "Segoe UI", system-ui, -apple-system, sans-serif; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.18) 2px, rgba(0, 0, 0, 0.18) 4px),
+    radial-gradient(ellipse at top, var(--bg-glow) 0%, var(--bg) 60%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font: var(--fs)/1.6 var(--body-font);
+  zoom: var(--zoom);
+}
+
+::selection { background: var(--magenta); color: var(--bg); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #06060a; }
+::-webkit-scrollbar-thumb { background: #00ddff44; }
+::-webkit-scrollbar-thumb:hover { background: #00ddff88; }
+::-webkit-scrollbar-corner { background: transparent; }
+
+code, pre, textarea { font-family: var(--mono); }
+
+/*
+ * Pixel frame: four offset hard shadows draw a border with stepped corners
+ * (no border-radius anywhere). Set --edge to color it. Apps can frame their
+ * own elements with .pixel-frame (or .pixel-frame--sm for a 2px frame).
+ */
+.pixel-frame, .panel, .btn, .field textarea, .avatar, .banner, .status, .tag, .chip, .tab, .control input, .control select {
+  --edge: var(--line);
+  border: none;
+  border-radius: 0;
+  box-shadow:
+    0 calc(var(--px) * -1) 0 0 var(--edge),
+    0 var(--px) 0 0 var(--edge),
+    calc(var(--px) * -1) 0 0 0 var(--edge),
+    var(--px) 0 0 0 var(--edge);
+}
+.pixel-frame--sm, .status, .tag, .chip { --px: 2px; }
+
+/* ---- effects: reduced drops the scanline layer and glow halos; off also stops animation ---- */
+:root[data-effects="reduced"] body, :root[data-effects="off"] body {
+  background-image: radial-gradient(ellipse at top, var(--bg-glow) 0%, var(--bg) 60%);
+  background-attachment: scroll;
+}
+:root[data-effects="off"] body { background-image: none; }
+:root[data-effects="off"] * { text-shadow: none !important; }
+:root[data-effects="off"] *, :root[data-effects="off"] *::before, :root[data-effects="off"] *::after { animation: none !important; transition: none !important; }
+
+:root[data-touch="on"] ::-webkit-scrollbar { width: 12px; height: 12px; }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .2; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
