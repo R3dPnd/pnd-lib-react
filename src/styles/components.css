@@ -207,3 +207,4 @@
 .working__time { opacity: .7; }
 .composer { flex-direction: row; align-items: center; gap: 8px; text-transform: none; letter-spacing: normal; }
 .composer input { flex: 1; min-width: 0; }
+:root[data-touch="on"] .msg__actions { opacity: 1; }

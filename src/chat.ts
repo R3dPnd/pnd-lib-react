@@ -1,3 +1,5 @@
+import { Children, type ReactNode } from "react";
+
 /** Elapsed time since `fromMs`: "7s", then "1m 05s". Never negative. */
 export function fmtElapsed(fromMs: number, nowMs: number): string {
   const total = Math.max(0, Math.floor((nowMs - fromMs) / 1000));
@@ -18,4 +20,9 @@ export function isNearBottom(
 /** Enter sends; Shift+Enter inserts a newline; Enter confirming an IME composition does not send. */
 export function isSendKey(e: { key: string; shiftKey: boolean; isComposing?: boolean }): boolean {
   return e.key === "Enter" && !e.shiftKey && !e.isComposing;
+}
+
+/** True when `children` renders nothing: null, false, `[]`, or arrays of only null/false. */
+export function hasNoChildren(children: ReactNode): boolean {
+  return Children.toArray(children).length === 0;
 }

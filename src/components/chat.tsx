@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, type KeyboardEvent, type ReactNode } from "react";
-import { fmtElapsed, isNearBottom, isSendKey } from "../chat";
+import { fmtElapsed, hasNoChildren, isNearBottom, isSendKey } from "../chat";
 import { useNow } from "../hooks/useNow";
 import { Button } from "./Button";
 
@@ -78,7 +78,7 @@ export function MessageList({ children, stickKey, forceKey, empty, className = "
 
   return (
     <div ref={ref} className={`msglist ${className}`.trim()} onScroll={onScroll}>
-      {empty != null && !children ? empty : children}
+      {empty != null && hasNoChildren(children) ? empty : children}
     </div>
   );
 }

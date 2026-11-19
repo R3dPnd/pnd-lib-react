@@ -223,8 +223,8 @@
 }
 
 /* ---- chat ---- */
-:root[data-theme="glass"] .spinner { animation-timing-function: linear; border-radius: 50%; }
-:root[data-theme="glass"] .spinner { color: var(--red); }
+:root[data-theme="glass"] .spinner { animation-timing-function: linear; border-radius: 50%; color: var(--red); }
+:root[data-theme="glass"] .tool-activity .spinner { color: inherit; }
 :root[data-theme="glass"] .msg__bubble {
   margin: 0; box-shadow: none; border-radius: 16px; padding: 8px 12px;
   background: var(--surface); border: 1px solid var(--surface-line);

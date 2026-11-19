@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { clampScale, profileOf, resolve, sanitizePrefs, DEFAULT_PREFS, type DisplayInfo } from "../src/display";
 import { relTime } from "../src/format";
-import { fmtElapsed, isNearBottom, isSendKey } from "../src/chat";
+import { fmtElapsed, hasNoChildren, isNearBottom, isSendKey } from "../src/chat";
 import { readHashRoute } from "../src/hooks/useHashRoute";
 import { resolveTheme } from "../src/theme";
 
@@ -99,5 +99,15 @@ describe("chat helpers", () => {
     expect(isSendKey({ key: "Enter", shiftKey: true })).toBe(false);
     expect(isSendKey({ key: "Enter", shiftKey: false, isComposing: true })).toBe(false);
     expect(isSendKey({ key: "a", shiftKey: false })).toBe(false);
+  });
+});
+
+describe("hasNoChildren", () => {
+  it("treats empty renderables as empty", () => {
+    expect(hasNoChildren([])).toBe(true);
+    expect(hasNoChildren([null, false])).toBe(true);
+    expect(hasNoChildren(null)).toBe(true);
+    expect(hasNoChildren(["a"])).toBe(false);
+    expect(hasNoChildren([null, "a"])).toBe(false);
   });
 });
