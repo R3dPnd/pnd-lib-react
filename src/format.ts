@@ -12,3 +12,8 @@ export function relTime(ts: number | string, now = Date.now()): string {
   if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
   return new Date(ms).toLocaleDateString();
 }
+
+/** Bar colour for a 0-100 usage percentage: green below 70, orange below 90, red from 90. */
+export function meterTone(percent: number): "green" | "orange" | "red" {
+  return percent >= 90 ? "red" : percent >= 70 ? "orange" : "green";
+}

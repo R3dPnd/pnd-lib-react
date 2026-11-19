@@ -14,6 +14,7 @@ export {
   type TextInputProps,
 } from "./components/forms";
 export { Segmented, Tabs, type SegmentedProps, type Tab, type TabsProps } from "./components/Tabs";
+export { Card, IconButton, Meter, NavRail, NavRailItem, type IconButtonProps } from "./components/layout";
 export { DisplaySettings } from "./components/DisplaySettings";
 export {
   ChatMessage,
@@ -65,4 +66,4 @@ export { applyTheme, resolveTheme, THEMES, type Theme } from "./theme";
 // Utilities
 export { fmtElapsed, hasNoChildren, isNearBottom, isSendKey } from "./chat";
 export { getJson, postJson } from "./fetch";
-export { fmtTime, relTime } from "./format";
+export { fmtTime, meterTone, relTime } from "./format";

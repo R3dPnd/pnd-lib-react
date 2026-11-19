@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { clampScale, profileOf, resolve, sanitizePrefs, DEFAULT_PREFS, type DisplayInfo } from "../src/display";
-import { relTime } from "../src/format";
+import { meterTone, relTime } from "../src/format";
 import { fmtElapsed, hasNoChildren, isNearBottom, isSendKey } from "../src/chat";
 import { readHashRoute } from "../src/hooks/useHashRoute";
 import { resolveTheme } from "../src/theme";
@@ -109,5 +109,16 @@ describe("hasNoChildren", () => {
     expect(hasNoChildren(null)).toBe(true);
     expect(hasNoChildren(["a"])).toBe(false);
     expect(hasNoChildren([null, "a"])).toBe(false);
+  });
+});
+
+describe("meterTone", () => {
+  it("is green below 70, orange below 90, red from 90", () => {
+    expect(meterTone(0)).toBe("green");
+    expect(meterTone(69.9)).toBe("green");
+    expect(meterTone(70)).toBe("orange");
+    expect(meterTone(89.9)).toBe("orange");
+    expect(meterTone(90)).toBe("red");
+    expect(meterTone(100)).toBe("red");
   });
 });

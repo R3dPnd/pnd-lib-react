@@ -208,3 +208,36 @@
 .composer { flex-direction: row; align-items: center; gap: 8px; text-transform: none; letter-spacing: normal; }
 .composer input { flex: 1; min-width: 0; }
 :root[data-touch="on"] .msg__actions { opacity: 1; }
+
+/* ---- icon button, card, meter, nav rail ---- */
+.icon-btn {
+  --edge: var(--cyan);
+  display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0;
+  font: inherit; color: var(--cyan); background: var(--panel-2); cursor: pointer; border: none; border-radius: 0; margin: var(--px);
+  box-shadow: 0 calc(var(--px) * -1) 0 0 var(--edge), 0 var(--px) 0 0 var(--edge), calc(var(--px) * -1) 0 0 0 var(--edge), var(--px) 0 0 0 var(--edge);
+}
+.icon-btn:hover:not(:disabled), .icon-btn.is-active { background: var(--cyan-bg); }
+.icon-btn:disabled { opacity: .5; cursor: not-allowed; }
+.icon-btn:focus-visible { outline: 2px dashed var(--focus); outline-offset: 5px; }
+.card {
+  --edge: var(--muted);
+  background: var(--panel); padding: var(--pad); margin: var(--px);
+  box-shadow: 0 calc(var(--px) * -1) 0 0 var(--edge), 0 var(--px) 0 0 var(--edge), calc(var(--px) * -1) 0 0 0 var(--edge), var(--px) 0 0 0 var(--edge);
+}
+.meter { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.meter__head { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.meter__value { color: var(--ink); }
+.meter__track { height: 8px; background: var(--panel-2); overflow: hidden; }
+.meter__bar { height: 100%; transition: width .3s; }
+.meter__bar--green { background: var(--green); }
+.meter__bar--orange { background: var(--orange); }
+.meter__bar--red { background: var(--red); }
+.meter__sub { font-size: 11px; color: var(--muted); }
+.nav-rail { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 6px; background: var(--panel); }
+.nav-rail__item {
+  display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0;
+  font: inherit; color: var(--muted); background: transparent; border: none; cursor: pointer;
+}
+.nav-rail__item:hover { color: var(--ink); }
+.nav-rail__item.is-active { color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--panel)); }
+.nav-rail__item:focus-visible { outline: 2px dashed var(--focus); outline-offset: 2px; }

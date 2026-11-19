@@ -244,3 +244,26 @@
 }
 :root[data-theme="glass"] .composer input { border-radius: 999px; padding: 8px 14px; font-size: 12.5px; }
 :root[data-theme="glass"] .composer .btn--primary { background: var(--accent-grad); color: #fff; border-color: transparent; border-radius: 999px; }
+
+/* ---- layout: icon button, card, meter, nav rail ---- */
+:root[data-theme="glass"] .icon-btn {
+  width: 34px; height: 34px; margin: 0; border-radius: var(--radius-sm); color: var(--ink);
+  background: transparent; border: 1px solid transparent; box-shadow: none;
+}
+:root[data-theme="glass"] .icon-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.08); }
+:root[data-theme="glass"] .icon-btn.is-active { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
+:root[data-theme="glass"] .card {
+  margin: 0; box-shadow: none; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--surface-line);
+  -webkit-backdrop-filter: blur(var(--blur)); backdrop-filter: blur(var(--blur));
+}
+:root[data-theme="glass"] .meter__head { font-size: 11px; letter-spacing: .04em; }
+:root[data-theme="glass"] .meter__track { background: rgba(255, 255, 255, 0.08); border-radius: 999px; }
+:root[data-theme="glass"] .meter__bar { border-radius: 999px; }
+:root[data-theme="glass"] .nav-rail {
+  background: var(--surface-bar); border-right: 1px solid var(--surface-line); padding: 10px 8px;
+  -webkit-backdrop-filter: blur(var(--blur)); backdrop-filter: blur(var(--blur));
+}
+:root[data-theme="glass"] .nav-rail__item { border-radius: var(--radius-sm); }
+:root[data-theme="glass"] .nav-rail__item:hover { background: rgba(255, 255, 255, 0.08); }
+:root[data-theme="glass"] .nav-rail__item.is-active { color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }

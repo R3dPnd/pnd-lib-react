@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { KeyboardEvent, ReactNode } from "react";
 
 export interface CheckboxProps {
   checked: boolean;
@@ -17,7 +17,8 @@ export function Checkbox({ checked, onChange, disabled, children }: CheckboxProp
 }
 
 export interface SelectProps {
-  label: string;
+  /** Small caps label above the control; omit for an unlabelled select. */
+  label?: string;
   value: string;
   onChange: (value: string) => void;
   options: { value: string; label: string }[];
@@ -26,7 +27,7 @@ export interface SelectProps {
 export function Select({ label, value, onChange, options }: SelectProps) {
   return (
     <label className="control">
-      <span className="control__label">{label}</span>
+      {label !== undefined && <span className="control__label">{label}</span>}
       <select value={value} onChange={(e) => onChange(e.target.value)}>
         {options.map((o) => (
           <option key={o.value} value={o.value}>
@@ -39,25 +40,37 @@ export function Select({ label, value, onChange, options }: SelectProps) {
 }
 
 export interface TextInputProps {
-  label: string;
+  /** Small caps label above the input; omit for a bare input (placeholder becomes its aria-label). */
+  label?: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   type?: "text" | "search" | "url";
+  disabled?: boolean;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 /** Single-line input with a small caps label above it. */
-export function TextInput({ label, value, onChange, placeholder, type = "text" }: TextInputProps) {
+export function TextInput({ label, value, onChange, placeholder, type = "text", disabled, onKeyDown }: TextInputProps) {
   return (
     <label className="control">
-      <span className="control__label">{label}</span>
-      <input type={type} value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
+      {label !== undefined && <span className="control__label">{label}</span>}
+      <input
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        aria-label={label === undefined ? placeholder : undefined}
+        disabled={disabled}
+        onKeyDown={onKeyDown}
+        onChange={(e) => onChange(e.target.value)}
+      />
     </label>
   );
 }
 
 export interface TextFieldProps {
-  label: string;
+  /** Accent label above the textarea; omit for a bare textarea (placeholder becomes its aria-label). */
+  label?: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -70,7 +83,14 @@ export function TextField({ label, value, onChange, placeholder, rows = 2, requi
   return (
     <label className="field">
       {label}
-      <textarea value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={rows} required={required} />
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        aria-label={label === undefined ? placeholder : undefined}
+        rows={rows}
+        required={required}
+      />
     </label>
   );
 }
