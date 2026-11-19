@@ -34,7 +34,7 @@ component styles.
 | Components | `Button`, `Tabs`, `Segmented`, `Panel`, `Chip`, `Tag`, `EmptyState`, `Banner`, `StatusBadge`, `Timestamp`, `Avatar`, `TypingIndicator`, `CopyButton`, `Checkbox`, `Select`, `TextInput`, `TextField`, `DisplaySettings` (`showFont` prop hides the font picker) |
 | Layout | `IconButton`, `Card`, `Meter`, `NavRail`, `NavRailItem` |
 | Chat | `Spinner`, `ChatMessage`, `MessageList`, `ToolActivity`, `WorkingIndicator`, `Composer` |
-| Hooks | `useLoad`, `useHashRoute`, `useDisplay`, `useNow` |
+| Hooks | `useLoad`, `useHashRoute`, `readHashRoute`, `useDisplay`, `useNow` |
 | Themes | `Theme`, `THEMES`, `resolveTheme`, `applyTheme` |
 | Display prefs | `DisplayHost`, `localStorageHost`, `applySavedDisplay`, `resolve`, `sanitizePrefs`, … |
 | Utilities | `getJson`, `postJson`, `fmtTime`, `relTime`, `meterTone`, `fmtElapsed`, `isNearBottom`, `isSendKey`, `hasNoChildren` |
