@@ -11,7 +11,7 @@ Pin a tag as a git dependency. npm runs `prepare`, which builds `dist/`.
 
 ```json
 "dependencies": {
-  "pnd-lib-react": "github:R3dPnd/pnd-lib-react#v0.2.0"
+  "pnd-lib-react": "github:R3dPnd/pnd-lib-react#v0.2.1"
 }
 ```
 

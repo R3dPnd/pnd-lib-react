@@ -163,6 +163,7 @@
 :root[data-theme="glass"] .field textarea {
   background: var(--well);
   margin: 0;
+  font-family: var(--body-font);
 }
 :root[data-theme="glass"] .control input:focus,
 :root[data-theme="glass"] .control select:focus,
@@ -177,6 +178,7 @@
 :root[data-theme="glass"] .seg__opt { font-size: 12px; font-weight: 500; margin: 0; background: var(--surface-bar); border-radius: 999px; }
 :root[data-theme="glass"] .seg__opt.is-on { color: var(--ink); background: var(--accent-grad); border-color: transparent; }
 :root[data-theme="glass"] .seg__opt:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+:root[data-theme="glass"] .checkbox { display: inline-flex; }
 :root[data-theme="glass"] .checkbox input { accent-color: var(--accent-2); }
 :root[data-theme="glass"] .display-settings { padding: 0; }
 
@@ -203,10 +205,10 @@
   border-radius: 50%;
 }
 :root[data-theme="glass"] .typing { padding-left: 46px; }
-:root[data-theme="glass"] .typing__dots i { border-radius: 50%; animation: pulse 1s ease-in-out infinite; }
+:root[data-theme="glass"] .typing__dots i { border-radius: 50%; animation: pnd-pulse 1s ease-in-out infinite; }
 :root[data-theme="glass"] .typing__dots i:nth-child(2) { animation-delay: 0.15s; }
 :root[data-theme="glass"] .typing__dots i:nth-child(3) { animation-delay: 0.3s; }
-@keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes pnd-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
 
 /* ---- effects: reduced / off drop blur and glows; off also flattens the background ---- */
 :root[data-theme="glass"][data-effects="reduced"],

@@ -98,7 +98,7 @@ export function WorkingIndicator({ label, startedMs }: { label: string; startedM
     <span className="working" role="status">
       <Spinner />
       {label}
-      <small className="working__time">{fmtElapsed(startedMs, now)}</small>
+      <small className="working__time" aria-hidden="true">{fmtElapsed(startedMs, now)}</small>
     </span>
   );
 }
