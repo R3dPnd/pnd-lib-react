@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { clampScale, profileOf, resolve, sanitizePrefs, DEFAULT_PREFS, type DisplayInfo } from "../src/display";
 import { relTime } from "../src/format";
+import { fmtElapsed, isNearBottom, isSendKey } from "../src/chat";
 import { readHashRoute } from "../src/hooks/useHashRoute";
 import { resolveTheme } from "../src/theme";
 
@@ -77,5 +78,26 @@ describe("resolveTheme", () => {
     expect(resolveTheme("", "glass")).toBe("glass");
     expect(resolveTheme("rose", "glass")).toBe("glass");
     expect(resolveTheme(" Glass ")).toBe("glass"); // trimmed, case-insensitive
+  });
+});
+
+describe("chat helpers", () => {
+  it("formats elapsed time", () => {
+    expect(fmtElapsed(0, 0)).toBe("0s");
+    expect(fmtElapsed(0, 59_900)).toBe("59s");
+    expect(fmtElapsed(0, 72_000)).toBe("1m 12s");
+    expect(fmtElapsed(0, 65_000)).toBe("1m 05s");
+    expect(fmtElapsed(10_000, 5_000)).toBe("0s"); // started "in the future"
+  });
+  it("knows when the list is at the bottom", () => {
+    expect(isNearBottom({ scrollTop: 552, scrollHeight: 1000, clientHeight: 400 })).toBe(true);
+    expect(isNearBottom({ scrollTop: 300, scrollHeight: 1000, clientHeight: 400 })).toBe(false);
+    expect(isNearBottom({ scrollTop: 0, scrollHeight: 300, clientHeight: 400 })).toBe(true);
+  });
+  it("sends on Enter only", () => {
+    expect(isSendKey({ key: "Enter", shiftKey: false })).toBe(true);
+    expect(isSendKey({ key: "Enter", shiftKey: true })).toBe(false);
+    expect(isSendKey({ key: "Enter", shiftKey: false, isComposing: true })).toBe(false);
+    expect(isSendKey({ key: "a", shiftKey: false })).toBe(false);
   });
 });

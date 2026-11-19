@@ -51,5 +51,6 @@ export {
 export { applyTheme, resolveTheme, THEMES, type Theme } from "./theme";
 
 // Utilities
+export { fmtElapsed, isNearBottom, isSendKey } from "./chat";
 export { getJson, postJson } from "./fetch";
 export { fmtTime, relTime } from "./format";
