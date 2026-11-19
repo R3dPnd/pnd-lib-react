@@ -178,3 +178,32 @@
 :root[data-touch="on"] .control input, :root[data-touch="on"] .control select { min-height: 36px; }
 :root[data-touch="on"] .checkbox input { width: 22px; height: 22px; }
 :root[data-touch="on"] .scale-row input[type="range"] { height: 32px; }
+
+/* ---- chat ---- */
+.spinner { display: inline-block; flex: none; border: 2px solid currentColor; border-right-color: transparent; animation: pnd-spin .8s steps(8) infinite; }
+.spinner--sm { width: 10px; height: 10px; }
+.spinner--md { width: 18px; height: 18px; }
+@keyframes pnd-spin { to { transform: rotate(360deg); } }
+.msglist { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; padding: var(--px); }
+.msg { display: flex; align-items: flex-start; gap: 6px; }
+.msg--user { justify-content: flex-end; }
+.msg--system { justify-content: center; }
+.msg__col { display: flex; flex-direction: column; max-width: 80%; min-width: 0; }
+.msg--user .msg__col { align-items: flex-end; }
+.msg__bubble {
+  --edge: var(--line);
+  white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%;
+  padding: 8px 12px; background: var(--panel-2); color: var(--ink);
+  box-shadow: 0 -2px 0 0 var(--edge), 0 2px 0 0 var(--edge), -2px 0 0 0 var(--edge), 2px 0 0 0 var(--edge);
+  margin: 2px;
+}
+.msg--user .msg__bubble { --edge: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--panel-2)); }
+.msg--system .msg__bubble { color: var(--muted); font-size: 11px; }
+.msg__time { font-size: 10px; color: var(--muted); margin-top: 4px; }
+.msg__actions { display: flex; gap: 4px; opacity: 0; transition: opacity .12s; }
+.msg:hover .msg__actions, .msg:focus-within .msg__actions { opacity: 1; }
+.tool-activity { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; font-size: 11px; padding: 3px 9px; color: var(--accent); background: var(--panel-2); }
+.working { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; font-size: 12px; padding: 6px 12px; color: var(--muted); background: var(--panel-2); }
+.working__time { opacity: .7; }
+.composer { flex-direction: row; align-items: center; gap: 8px; text-transform: none; letter-spacing: normal; }
+.composer input { flex: 1; min-width: 0; }

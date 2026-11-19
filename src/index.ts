@@ -15,11 +15,23 @@ export {
 } from "./components/forms";
 export { Segmented, Tabs, type SegmentedProps, type Tab, type TabsProps } from "./components/Tabs";
 export { DisplaySettings } from "./components/DisplaySettings";
+export {
+  ChatMessage,
+  Composer,
+  MessageList,
+  Spinner,
+  ToolActivity,
+  WorkingIndicator,
+  type ChatMessageProps,
+  type ComposerProps,
+  type MessageListProps,
+} from "./components/chat";
 
 // Hooks
 export { useDisplay, type DisplayState } from "./hooks/useDisplay";
 export { readHashRoute, useHashRoute } from "./hooks/useHashRoute";
 export { useLoad } from "./hooks/useLoad";
+export { useNow } from "./hooks/useNow";
 
 // Display prefs
 export {
