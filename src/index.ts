@@ -47,6 +47,9 @@ export {
   type Resolved,
 } from "./display";
 
+// Themes
+export { applyTheme, resolveTheme, THEMES, type Theme } from "./theme";
+
 // Utilities
 export { getJson, postJson } from "./fetch";
 export { fmtTime, relTime } from "./format";

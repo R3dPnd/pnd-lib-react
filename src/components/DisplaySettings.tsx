@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { Segmented } from "./Tabs";
 
 /** Header button + popover for scale, density, effects, touch targets and font. */
-export function DisplaySettings({ d }: { d: DisplayState }) {
+export function DisplaySettings({ d, showFont = true }: { d: DisplayState; showFont?: boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { prefs, resolved, display } = d;
@@ -103,15 +103,17 @@ export function DisplaySettings({ d }: { d: DisplayState }) {
               { id: "off", label: "Normal" },
             ]}
           />
-          <Segmented
-            label="Font"
-            value={prefs.font}
-            onChange={(font) => d.update({ font })}
-            options={[
-              { id: "pixel", label: "Pixel" },
-              { id: "readable", label: "Readable" },
-            ]}
-          />
+          {showFont && (
+            <Segmented
+              label="Font"
+              value={prefs.font}
+              onChange={(font) => d.update({ font })}
+              options={[
+                { id: "pixel", label: "Pixel" },
+                { id: "readable", label: "Readable" },
+              ]}
+            />
+          )}
 
           <div className="display-pop__foot">
             <Button onClick={d.toggleFullscreen}>{d.fullscreen ? "Exit fullscreen" : "Fullscreen"}</Button>

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { clampScale, profileOf, resolve, sanitizePrefs, DEFAULT_PREFS, type DisplayInfo } from "../src/display";
 import { relTime } from "../src/format";
 import { readHashRoute } from "../src/hooks/useHashRoute";
+import { resolveTheme } from "../src/theme";
 
 const display = (width: number, height: number, touch = false): DisplayInfo => ({
   scaleFactor: 1,
@@ -63,5 +64,18 @@ describe("relTime", () => {
   });
   it("never goes negative for clock skew", () => {
     expect(relTime(now + 10_000, now)).toBe("0s ago");
+  });
+});
+
+describe("resolveTheme", () => {
+  it("accepts known themes", () => {
+    expect(resolveTheme("glass")).toBe("glass");
+    expect(resolveTheme("arcade", "glass")).toBe("arcade");
+  });
+  it("falls back for empty, unknown and legacy names", () => {
+    expect(resolveTheme(undefined)).toBe("arcade");
+    expect(resolveTheme("", "glass")).toBe("glass");
+    expect(resolveTheme("rose", "glass")).toBe("glass");
+    expect(resolveTheme(" Glass ")).toBe("glass"); // trimmed, case-insensitive
   });
 });

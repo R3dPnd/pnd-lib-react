@@ -1,0 +1,223 @@
+/*
+ * PND glass theme: sleek red -> purple, frosted surfaces, system sans.
+ * Opt in with <html data-theme="glass"> (applyTheme("glass")). Every selector is
+ * scoped to that attribute, so the arcade theme is untouched without it.
+ *
+ * Sections: tokens, page, frames reset, panel, buttons, form + tabs, small parts,
+ * effects fallbacks. Later components append their own sections below.
+ */
+
+/* ---- tokens ---- */
+:root[data-theme="glass"] {
+  --bg: #120a1f;
+  --bg-glow: #2a0f3a;
+  --panel: rgba(255, 255, 255, 0.07);
+  --panel-2: rgba(255, 255, 255, 0.05);
+  --well: rgba(255, 255, 255, 0.06);
+  --line: rgba(255, 255, 255, 0.1);
+  --line-hover: rgba(255, 255, 255, 0.22);
+  --ink: #f3eef8;
+  --muted: #b9a9c6;
+  --placeholder: #b9a9c6;
+  --shadow: transparent;
+
+  --accent: #ff2d55;
+  --focus: #8b2cf5;
+  --accent-2: #8b2cf5;
+  --accent-grad: linear-gradient(135deg, #e11d48, #7c3aed);
+
+  /* status palette, tuned for the plum background (meanings match arcade) */
+  --cyan: #c4a8ff;
+  --teal: #c4a8ff;
+  --green: #4ade80;
+  --orange: #fbbf24;
+  --violet: #c084fc;
+  --red: #ff4d73;
+  --magenta: #f472b6;
+  --yellow: #fde68a;
+  --blue: #93a5ff;
+  --red-bg: rgba(225, 29, 72, 0.16);
+  --red-ink: #ffb3c4;
+  --orange-bg: rgba(251, 191, 36, 0.12);
+  --cyan-bg: rgba(196, 168, 255, 0.12);
+
+  /* glass surfaces */
+  --surface: rgba(255, 255, 255, 0.07);
+  --surface-bar: rgba(255, 255, 255, 0.04);
+  --surface-line: rgba(255, 255, 255, 0.1);
+  --blur: 10px;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --tool-bg: rgba(225, 29, 72, 0.16);
+  --tool-ink: #ffb3c4;
+
+  --body-font: -apple-system, "Inter", "Segoe UI", system-ui, sans-serif;
+  --pixel: var(--body-font);
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --px: 0px;
+}
+
+/* ---- page ---- */
+:root[data-theme="glass"] body {
+  background-color: #120a1f;
+  background-image: radial-gradient(110% 80% at 0% 0%, #5a0f24 0%, #2a0f3a 45%, #120a1f 100%);
+  background-attachment: fixed;
+}
+:root[data-theme="glass"] ::selection { background: var(--accent-2); color: #fff; }
+:root[data-theme="glass"] ::-webkit-scrollbar-track { background: transparent; }
+:root[data-theme="glass"] ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); border-radius: 4px; }
+:root[data-theme="glass"] ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+
+/* ---- frames reset: no pixel frames, shadows, caps ---- */
+:root[data-theme="glass"] .pixel-frame,
+:root[data-theme="glass"] .panel,
+:root[data-theme="glass"] .btn,
+:root[data-theme="glass"] .field textarea,
+:root[data-theme="glass"] .avatar,
+:root[data-theme="glass"] .banner,
+:root[data-theme="glass"] .status,
+:root[data-theme="glass"] .tag,
+:root[data-theme="glass"] .chip,
+:root[data-theme="glass"] .tab,
+:root[data-theme="glass"] .control input,
+:root[data-theme="glass"] .control select,
+:root[data-theme="glass"] .seg__opt {
+  box-shadow: none;
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-sm);
+  text-transform: none;
+  letter-spacing: 0;
+  text-shadow: none;
+}
+:root[data-theme="glass"] .control,
+:root[data-theme="glass"] .field,
+:root[data-theme="glass"] .seg__label,
+:root[data-theme="glass"] .empty,
+:root[data-theme="glass"] .typing {
+  text-transform: none;
+  letter-spacing: 0;
+}
+:root[data-theme="glass"] .field { color: var(--muted); }
+
+/* ---- panel ---- */
+:root[data-theme="glass"] .panel {
+  background: var(--surface);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  border-radius: var(--radius);
+  margin: 0;
+}
+:root[data-theme="glass"] .panel h2 {
+  font-family: var(--body-font);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  text-shadow: none;
+  color: var(--panel-accent, var(--ink));
+}
+:root[data-theme="glass"] .panel h2::before { content: none; }
+:root[data-theme="glass"] .display-pop { --edge: var(--surface-line); --panel-accent: var(--ink); background: #1d1027; }
+:root[data-theme="glass"] .display-pop__foot { border-top: 1px solid var(--surface-line); }
+:root[data-theme="glass"] .banner { margin: 0 0 18px; border-radius: var(--radius); }
+:root[data-theme="glass"] .banner--error { border-color: color-mix(in srgb, var(--red) 45%, transparent); }
+:root[data-theme="glass"] .banner--warn { border-color: color-mix(in srgb, var(--orange) 45%, transparent); }
+
+/* ---- buttons ---- */
+:root[data-theme="glass"] .btn {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  transition: background 0.15s, border-color 0.15s;
+}
+:root[data-theme="glass"] .btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.12); border-color: var(--line-hover); }
+:root[data-theme="glass"] .btn:active:not(:disabled) { transform: none; }
+:root[data-theme="glass"] .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+:root[data-theme="glass"] .btn--primary {
+  background: var(--accent-grad);
+  color: #fff;
+  border-color: transparent;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-shadow: none;
+  box-shadow: none;
+}
+:root[data-theme="glass"] .btn--primary:hover:not(:disabled) { background: var(--accent-grad); filter: brightness(1.12); border-color: transparent; }
+:root[data-theme="glass"] .btn--primary:active:not(:disabled) { box-shadow: none; filter: brightness(0.95); }
+:root[data-theme="glass"] .btn--primary:disabled { background: rgba(255, 255, 255, 0.08); color: var(--muted); box-shadow: none; text-shadow: none; }
+:root[data-theme="glass"] .btn--danger { color: var(--red); }
+:root[data-theme="glass"] .btn--danger:hover:not(:disabled) { background: var(--red-bg); }
+:root[data-theme="glass"] .btn--ghost { color: var(--ink); background: transparent; }
+:root[data-theme="glass"] .btn--ghost:hover:not(:disabled) { background: var(--surface); }
+:root[data-theme="glass"] .btn--link { border: none; background: none; color: var(--who, var(--accent)); }
+:root[data-theme="glass"] .btn--link:hover:not(:disabled) { background: none; text-decoration: underline; }
+:root[data-theme="glass"] .btn--link::before { content: none; }
+
+/* ---- forms, tabs, segmented ---- */
+:root[data-theme="glass"] .control input,
+:root[data-theme="glass"] .control select,
+:root[data-theme="glass"] .field textarea {
+  background: var(--well);
+  margin: 0;
+}
+:root[data-theme="glass"] .control input:focus,
+:root[data-theme="glass"] .control select:focus,
+:root[data-theme="glass"] .field textarea:focus { border-color: var(--accent-2); }
+:root[data-theme="glass"] .tabs { padding: 0; gap: 8px; }
+:root[data-theme="glass"] .tab { font-family: var(--body-font); font-size: 13px; font-weight: 500; background: transparent; border-radius: 999px; }
+:root[data-theme="glass"] .tab:hover { border-color: var(--line-hover); }
+:root[data-theme="glass"] .tab.is-active { color: var(--ink); background: var(--accent-grad); border-color: transparent; }
+:root[data-theme="glass"] .tab:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+:root[data-theme="glass"] .tab__count { color: var(--tool-ink); }
+:root[data-theme="glass"] .seg__opts { padding: 0; }
+:root[data-theme="glass"] .seg__opt { font-size: 12px; font-weight: 500; margin: 0; background: var(--surface-bar); border-radius: 999px; }
+:root[data-theme="glass"] .seg__opt.is-on { color: var(--ink); background: var(--accent-grad); border-color: transparent; }
+:root[data-theme="glass"] .seg__opt:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+:root[data-theme="glass"] .checkbox input { accent-color: var(--accent-2); }
+:root[data-theme="glass"] .display-settings { padding: 0; }
+
+/* ---- small parts ---- */
+:root[data-theme="glass"] .empty--center::after { content: none; animation: none; }
+:root[data-theme="glass"] .status,
+:root[data-theme="glass"] .tag,
+:root[data-theme="glass"] .chip { border-radius: 999px; margin-left: 0; }
+:root[data-theme="glass"] .status--running { animation: none; }
+:root[data-theme="glass"] .status--running,
+:root[data-theme="glass"] .status--done,
+:root[data-theme="glass"] .status--error,
+:root[data-theme="glass"] .status--stopped,
+:root[data-theme="glass"] .tone--cyan, :root[data-theme="glass"] .tone--teal, :root[data-theme="glass"] .tone--green,
+:root[data-theme="glass"] .tone--orange, :root[data-theme="glass"] .tone--violet, :root[data-theme="glass"] .tone--red,
+:root[data-theme="glass"] .tone--magenta, :root[data-theme="glass"] .tone--yellow, :root[data-theme="glass"] .tone--blue {
+  border-color: color-mix(in srgb, var(--edge) 50%, transparent);
+}
+:root[data-theme="glass"] .avatar {
+  font-family: var(--body-font);
+  color: #fff;
+  background: var(--accent-grad);
+  border-color: transparent;
+  border-radius: 50%;
+}
+:root[data-theme="glass"] .typing { padding-left: 46px; }
+:root[data-theme="glass"] .typing__dots i { border-radius: 50%; animation: pulse 1s ease-in-out infinite; }
+:root[data-theme="glass"] .typing__dots i:nth-child(2) { animation-delay: 0.15s; }
+:root[data-theme="glass"] .typing__dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+/* ---- effects: reduced / off drop blur and glows; off also flattens the background ---- */
+:root[data-theme="glass"][data-effects="reduced"],
+:root[data-theme="glass"][data-effects="off"] { --blur: 0px; }
+:root[data-theme="glass"][data-effects="reduced"] *,
+:root[data-theme="glass"][data-effects="off"] * { box-shadow: none !important; }
+:root[data-theme="glass"][data-effects="reduced"] body { background-attachment: scroll; }
+:root[data-theme="glass"][data-effects="off"] body { background-image: none; background-color: #120a1f; }
+
+/* ---- no backdrop-filter: opaque surfaces ---- */
+@supports not (backdrop-filter: blur(1px)) {
+  :root[data-theme="glass"] { --surface: #1d1027; --surface-bar: #1d1027; }
+  :root[data-theme="glass"] .panel { background: #1d1027; }
+}
